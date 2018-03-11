@@ -211,6 +211,7 @@ module WinRM
           hash_file = check_files_ps_hash(files)
           logger.debug "hash_file is #{hash_file}"
           script = WinRM::FS::Scripts.render('check_files', hash_file: hash_file)
+          logger.debug "Check files script content #{script}"
           begin
             parse_response(shell.run(script))
           rescue Exception => e
