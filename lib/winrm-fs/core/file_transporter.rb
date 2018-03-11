@@ -368,10 +368,10 @@ module WinRM
           stderr = output.stderr
 
           if exitcode != 0
-            fail FileTransporterFailed, "[#{self.class}] Upload failed " \
+            raise FileTransporterFailed, "[#{self.class}] Upload failed " \
               "(exitcode: #{exitcode})\n#{stderr}"
           elsif stderr != '\r\n' && stderr != ''
-            fail FileTransporterFailed, "[#{self.class}] Upload failed " \
+            raise FileTransporterFailed, "[#{self.class}] Upload failed " \
               "(exitcode: 0), but stderr present\n#{stderr}"
           end
 
