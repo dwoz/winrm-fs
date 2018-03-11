@@ -216,6 +216,7 @@ module WinRM
             parse_response(shell.run(script))
           rescue Exception => e
             logger.error "Check files raised exception #{e.message}"
+            exit!
             {}
           end
         end
