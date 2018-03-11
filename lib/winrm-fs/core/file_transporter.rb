@@ -209,8 +209,13 @@ module WinRM
         def check_files(files)
           logger.debug 'Running check_files.ps1'
           hash_file = check_files_ps_hash(files)
+          logger.debug "hash_file is #{hash_file}"
           script = WinRM::FS::Scripts.render('check_files', hash_file: hash_file)
-          parse_response(shell.run(script))
+          begin
+            parse_response(shell.run(script))
+          rescue
+            logger.error "Check files raised exception"
+          end
         end
 
         # Constructs a collection of destination path/SHA1 checksum pairs as a
