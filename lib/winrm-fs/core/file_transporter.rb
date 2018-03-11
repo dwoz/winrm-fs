@@ -213,8 +213,9 @@ module WinRM
           script = WinRM::FS::Scripts.render('check_files', hash_file: hash_file)
           begin
             parse_response(shell.run(script))
-          rescue
-            logger.error "Check files raised exception"
+          rescue Exception => e
+            logger.error "Check files raised exception #{e.message}"
+            {}
           end
         end
 
